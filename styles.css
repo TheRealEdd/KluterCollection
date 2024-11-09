@@ -1,0 +1,548 @@
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+/* Main container for scroll snapping */
+.content {
+    scroll-snap-type: y proximity; /* Snap vertically, with mandatory behavior */
+    overflow-y: scroll; /* Enable vertical scrolling */
+    height: 100vh; /* Ensure the container takes up the full viewport height */
+    margin: 0;
+    padding: 0;
+}
+
+/* Header section styled as a scrollable section */
+.header {
+    scroll-snap-align: start; /* Align the start of the header to the snap point */
+    height: 100vh; /* Full viewport height for the header */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    position: relative; /* Ensures that ::before is positioned correctly */
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    z-index: 1;
+}
+
+.header .title, 
+.header .navigation {
+    position: relative;
+    z-index: 2;
+}
+
+.back-to-home {
+    font-size: 1em;
+    z-index: 1;
+    text-decoration: none;
+    color: white; /* Default color */
+}
+
+.back-to-home:hover {
+    text-decoration: underline;
+}
+
+.back-to-home a:active {
+    color: white; /* Color when the link is clicked */
+}
+
+.back-to-home a:visited {
+    color: white; /* Color for visited links */
+}
+
+.title {
+    font-size: 2.5em;
+    margin: 0;
+    padding: 1em 0 0 0;
+    text-align: left;
+}
+
+.subtitle {
+    font-size: 1.2em; /* Optional: Adjust the subtitle size */
+    margin-bottom: 10%; /* Optional: Add space between subtitle and navigation */
+    color: lightgray;
+    z-index: 1;
+}
+
+.navigation {
+    margin-top: 20px;
+    padding: 1em 1em 1em 0em;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation li {
+    margin: 20px 0;
+}
+
+.navigation a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
+}
+
+a.cta {
+    font-weight: bold;
+    color: white !important;
+    background-color: #EE7F00;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+a.cta:hover {
+    background-color: #cc6b00; /* Darker shade of orange for hover effect */
+}
+
+/* Floating back to top button */
+#backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #EE7F00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    opacity: 0; /* Hidden by default */
+    visibility: hidden; /* Hide element from layout */
+    transition: opacity 0.5s ease, visibility 0.5s ease, background-color 0.3s ease; /* Add transition for opacity and visibility */
+    z-index: 1000;
+}
+
+#backToTop.show {
+    opacity: 1; /* Make fully visible */
+    visibility: visible; /* Make the element visible */
+}
+
+#backToTop:hover {
+    background-color: #cc6b00; /* Darker shade of orange for hover effect */
+}
+
+
+/* Each section styled for scroll snapping */
+section {
+    scroll-snap-align: start; /* Align the start of each section to the snap point */
+    min-height: 100vh; /* Ensure each section takes up the full viewport height */
+    padding: 20px;
+    background: #f4f4f4;
+    color: black;
+    box-sizing: border-box;
+}
+
+#reserve {
+    background: #EE7F00;
+    color: white;
+}
+
+section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+section p {
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+/*                                       */
+/*           Instrument Selection        */
+/*                                       */
+
+.instrumentSelection {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.instrument {
+    display: flex;
+    align-items: flex-end;
+    justify-content: left;
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    background-size: cover; /* Keep the cover property */
+    background-position: left; /* Start with left positioning */
+    height: 50px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: background-position 0.3s ease; /* Smooth transition for background position */
+}
+
+.instrument::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)); /* Gradient overlay */
+    z-index: 0;
+    pointer-events: none; /* Ensure it doesn't block clicks */
+}
+
+.instrument:hover {
+    background-position: right; /* Transition to center on hover */
+}
+
+.instrument span {
+    position: relative;
+    z-index: 1; /* Keep the text on top */
+    /* padding: 10px; */
+    border-radius: 5px;
+}
+
+/* Mobile-specific interaction for tap */
+@media (hover: none) and (pointer: coarse) {
+    .instrument:active {
+        background-position: center; /* Simulate hover transition on tap */
+        opacity: 0.9; /* Slight opacity change for feedback */
+    }
+}
+
+
+/*                                       */
+/*              Recordings               */
+/*                                       */
+
+/* Media container styling */
+.media {
+    max-width: 100%; /* Ensure media doesn't exceed the container's width */
+    margin: 20px auto;  /* Center the media horizontally */
+}
+
+
+/* Specific styling for audio elements */
+.audio audio {
+    width: 100%;
+    height: auto;
+    max-width: 100%; /* Match the width of videos */
+    border-radius: 20px;
+    margin-top: 0px;
+}
+
+
+
+
+.video {
+    width: 100%;
+    margin: 20px 0;
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 5px;
+}
+
+.video video {
+    width: 100%; /* Make video take up 100% width of its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove any unwanted inline-block spaces */
+    border-radius: 5px;
+}
+
+
+/*                                       */
+/*                 Tuner                 */
+/*                                       */
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+}
+
+/* Space above tuner for scroll snapping. */
+#snap {
+    scroll-snap-align: start;
+    opacity: 0%;
+}
+
+#tuningRecommendation {
+    font-style: italic;
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    margin-left: 10px; /* Adds space around the switch */
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 25px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #EE7F00;
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+/* Rounded slider */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.tunerHeader {
+    display: flex;
+    align-items: center; /* Vertically aligns items */
+    justify-content: space-between; /* Pushes the toggle to the right */
+    margin-bottom: 20px; /* Space below the header */
+}
+
+#tunerH1 {
+    margin: 0;
+    font-size: 1.5em; /* Adjust the font size as needed */
+}
+
+#noteSelector {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the buttons horizontally */
+    margin: 20px; /* Adds some space at the top */
+}
+
+.noteButton {
+    width: 100%; /* Make buttons take up the full width of their container */
+    max-width: 200px; /* Optionally, limit the maximum width */
+    padding: 10px 20px;
+    margin: 5px 0; /* Adjust margin to create space between buttons */
+    text-align: left;
+    background-color: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#noteSelectorXL {
+    display: flex;
+    flex-wrap: wrap; /* Allows the buttons to wrap into multiple rows */
+    justify-content: left; /* Distributes space between buttons evenly */
+    gap: 10px; /* Adds spacing between buttons */
+    margin: 20px;
+}
+
+.noteButtonXL {
+    flex-basis: calc(33.33% - 10px); /* Each button takes up 1/3 of the row, minus gap */
+    max-width: calc(33.33% - 10px); /* Ensures no button is wider than 1/3 of the container */
+    padding: 10px 15px;
+    text-align: left;
+    background-color: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+
+.noteButton:hover {
+    background-color: #666;
+}
+
+.noteButton.active,
+.noteButtonXL.active {
+    background-color: #EE7F00; /* Green to indicate active note */
+    color: white;
+}
+
+#waveform {
+    width: 100%;
+    height: 100px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #444;
+    transition: background-color 0.5s;
+}
+
+#visualizerContainer {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    background-color: #F4F4F4;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+#visualizer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#marker {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background-color: #EE7F00;
+    transition: background-color 0.3s;
+    transform: translateX(-50%);
+}
+
+#targetMarker {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background-color: #EE7F00;
+    transform: translateX(-50%);
+}
+
+#pitchStatus {
+    font-size: 1.5em;
+    color: #333;
+}
+
+
+
+/*                                       */
+/*              RENT OUT FORM            */
+/*                                       */
+
+
+.reservation-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    color: black;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-form h2 {
+    margin-top: 0;
+}
+
+.reservation-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.reservation-form input[type="text"] {
+    width: calc(100% - 16px); /* Full width minus padding for both sides */
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Includes padding and border in element's total width */
+    font-size: 0.8em;
+}
+
+.reservation-form textarea {
+    width: calc(100% - 16px); /* Full width minus padding */
+    height: calc(50vw);
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Includes padding and border in the element's total width */
+    resize: none; /* Allows users to resize the height */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8em;
+}
+
+
+.reservation-form input[type="submit"] {
+    background-color: #EE7F00;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background-color 0.3s ease;
+}
+
+.reservation-form input[type="submit"]:hover {
+    background-color: #cc6b00;
+}

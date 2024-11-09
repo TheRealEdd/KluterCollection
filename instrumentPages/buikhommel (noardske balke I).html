@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kluter Collection - Noardske Balke</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="../media/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <main class="content">
+        <section class="header" id="header" style="background-image: url('../media/instrumentsNew/Buikhommel.jpg');">
+            <a href="../Homepage.html#instruments" class="back-to-home">← Back to Homepage</a>
+            <h1 class="title" id="instrument">Noardske Balke</h1>
+            <nav class="navigation">
+                <ul>
+                    <li><a href="#info" class="scroll-link">Info</a></li>
+                    <li><a href="#history" class="scroll-link">History</a></li>
+                    <li><a href="#recordings" class="scroll-link">Recordings</a></li>
+                    <li><a href="#tuning" class="scroll-link">Tuning</a></li>
+                    <li><a href="#how-to-use" class="scroll-link">How to Use</a></li>
+                    <li><a href="#reserve" class="scroll-link cta">Reserve</a></li>
+                </ul>
+            </nav>
+        </section>
+        
+        <section id="info">
+            <h2>Info</h2>
+            <p>Buikhommel (‘Fries model’/Noardske Balke)
+                met vier bourdonsnaren en een melodiesnaar.
+                De melodiesnaar heeft een toonbereik van
+                twee octaven. De melodiesnaar begint op de
+                kwint en heeft onderliggende diatonische
+                houten frets, met toegevoegde leidtonen naar
+                de kwinten c3 en c2.</p>
+            <p>Met potlood op binnenkant onderblad: Evert Kluter, Oenkerk, sept. 83. Twee melodiesnaren missen.</p>
+            <p>Hornbostel-Sachs Categorie: 314.122</p>
+        </section>
+        <section id="history">
+            <h2>History</h2>
+            <p>Onbekend. Enigszins vergelijkbaar met de trapeziumvormige hommel uit Sylt (D) (Ulrich 2011, p. 70).</p>
+        </section>
+        <section id="recordings">
+            <h2>Recordings</h2>
+            <p>This is where you'll be able to find recordings of the instrument in question! If there are no recordings to be found, then this section will be omitted.</p>
+        
+            <div class="video media">
+                <video width="560" height="315" controls>
+                    <source src="../media/HGVid.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        
+            
+            <div class="audio media">
+                <audio controls>
+                    <source src="../media/HGSOLO.mp3" type="audio/mp3">
+                    Your browser does not support the audio tag.
+                </audio>
+            </div>
+        
+            
+            <div class="audio media">
+                <audio controls>
+                    <source src="../media/HGDUO.mp3" type="audio/mp3">
+                    Your browser does not support the audio tag.
+                </audio>
+            </div>
+        </section>
+
+        <section id="tuning">
+            <h2>Tuning</h2>
+            <p>c4 (melodiesnaar); c4-f3-c4-c4<br>
+            Nb: a4=440Hz.</p>
+            <p>Gezien de lage spanning van de snaren kan de hommel wellicht een toon hoger (in G) gestemd worden.</p>
+            <p id="tuningRecommendation">The Prins Claus staff would like to remind you that the above tuning is a recommendation, feel free to experiment with other tunings yourself!</p>
+            
+            <p id="snap">.</p>
+            <div class="container">
+                
+                <div class="tunerHeader">
+                    <h1 id="tunerH1">Tuner</h1>
+                    <label class="switch">
+                        <input type="checkbox" id="toggleTuner">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+        
+                <div id="noteSelector">
+                    <button class="noteButton" data-note="C4">C4:<br>Melodiesnaar<br>Bourdonsnaar 1</button>
+                    <button class="noteButton" data-note="F3">F3:<br>Bourdonsnaar 2</button>
+                    <button class="noteButton" data-note="C4">C4:<br>Bourdonsnaren 3, 4</button>
+                </div>
+        
+                <canvas id="waveform" width="400" height="100"></canvas>
+        
+                <div id="visualizerContainer">
+                    <div id="visualizer"></div>
+                    <div id="marker"></div>
+                    <div id="targetMarker"></div>
+                </div>
+        
+                <div id="pitchStatus">Listening...</div>
+            </div>
+
+        </section>
+        <section id="how-to-use">
+            <h2>How to Use</h2>
+            <p>Getokkeld met plectrum rechterhand. Met de vingers van de linkerhand of met een stokje kan de melodiesnaar ingekort worden.</p>
+        </section>
+        <section id="reserve">
+            <h2>Reserve</h2>
+            <p>If you are a Hanze student interested in borrowing the instrument for use in your own project, the form below will allow you to get in touch with a member of staff.</p>
+            <p>When filling out the form, please mention what project you plan to use the instrument in, and what dates you would like to borrow it for.</p>
+            <p id="snap">.</p>
+            <form id="reservation-form" class="reservation-form">
+                <h2>Request to Reserve</h2>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Edward Rocca" required>
+        
+                <label for="student-number">Student Number:</label>
+                <input type="text" id="student-number" name="student-number" placeholder="123456" required>
+                        
+                <label for="personal-message">Leave a message:</label>
+                <textarea id="personal-message" name="personal-message" rows="3" placeholder="Don't forget to mention important information and dates"></textarea>
+
+                <input type="submit" value="Send Request">
+            </form>
+        </section>
+        <section id="footer">
+            <h2>Hiya!</h2>
+            <p id="footer-info">You've reached the end of the webpage. Thank you for testing this prototype and being a part of my graduation project!</p>
+            <p>- Edward</p>
+        </section>
+
+    </main>
+
+    <button id="backToTop">Back to top</button>
+    <script src="../script.js"></script>
+    <script src="../tunerScript.js"></script>
+</body>
+
+</html>
