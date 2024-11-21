@@ -17,6 +17,11 @@ body {
     height: 100vh; /* Ensure the container takes up the full viewport height */
     margin: 0;
     padding: 0;
+    display: grid;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
 }
 
 /* Header section styled as a scrollable section */
@@ -29,7 +34,6 @@ body {
     position: relative; /* Ensures that ::before is positioned correctly */
     display: flex;
     flex-direction: column;
-    justify-content: baseline;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -177,6 +181,7 @@ section h2 {
 section p {
     font-size: 1em;
     line-height: 1.6;
+    max-width: 440px;
 }
 
 /*                                       */
@@ -193,6 +198,7 @@ section p {
     display: flex;
     align-items: flex-end;
     justify-content: left;
+    max-width: 800px;
     text-decoration: none;
     color: white;
     font-size: 1.2em;
@@ -234,6 +240,10 @@ section p {
         background-position: center; /* Simulate hover transition on tap */
         opacity: 0.9; /* Slight opacity change for feedback */
     }
+}
+
+.contact {
+    position: relative;
 }
 
 
